@@ -1,0 +1,76 @@
+/* --- FONTS --- */
+@font-face { 
+  font-family: sans-serif; 
+  font-style: normal; 
+  font-weight: normal; 
+  src: url('http://transpect.le-tex.de/fontlib/dejavu-sans/regular/DejaVuSans.otf'); 
+} 
+@font-face { 
+  font-family: sans-serif; 
+  font-style: normal; 
+  font-weight: bold; 
+  src: url('http://transpect.le-tex.de/fontlib/dejavu-sans/bold/DejaVuSans-Bold.otf'); 
+} 
+@font-face {
+  font-family: sans-serif; 
+  font-style: italic; 
+  font-weight: normal; 
+  src: url('http://transpect.le-tex.de/fontlib/dejavu-sans/italic/DejaVuSans-Oblique.otf'); 
+} 
+@font-face { 
+  font-family: sans-serif; 
+  font-style: italic; 
+  font-weight: bold; 
+  src: url('http://transpect.le-tex.de/fontlib/dejavu-sans/bold-italic/DejaVuSans-BoldOblique.otf'); 
+}
+@font-face { 
+  font-family: serif; 
+  font-style: normal; 
+  font-weight: normal; 
+  src: url('http://transpect.le-tex.de/fontlib/gentium-basic/regular/GenBasR.ttf'); 
+} 
+@font-face { 
+  font-family: serif; 
+  font-style: normal; 
+  font-weight: bold; 
+  src: url('http://transpect.le-tex.de/fontlib/gentium-basic/bold/GenBasB.ttf'); 
+} 
+@font-face { 
+  font-family: serif; 
+  font-style: italic; 
+  font-weight: normal; 
+  src: url('http://transpect.le-tex.de/fontlib/gentium-basic/italic/GenBasI.ttf'); 
+} 
+@font-face { 
+  font-family: serif; 
+  font-style: italic; 
+  font-weight: bold; 
+  src: url('http://transpect.le-tex.de/fontlib/gentium-basic/bold-italic/GenBasBI.ttf'); 
+} 
+
+/* --- GENERELL --- */
+
+body { padding:0; margin:0; }
+
+body { 
+  font-family:serif; 
+  line-height:1.3; 
+  background-color:#fff; 
+  padding:0; 
+  margin-left:5%;
+  margin-right:5%; 
+}
+
+a { text-decoration:none; color:black; }
+a.url { text-decoration:none; color:blue; }
+
+p {
+  font-size:1em;  
+  line-height:140%;
+  text-indent:1em;
+  margin-bottom:0;
+  margin-top:0;
+  text-align:left;
+}
+
+h1, h2, h3 {color:mauve; margin:2em 0em 1em 0em;}
