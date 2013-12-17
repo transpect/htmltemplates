@@ -45,4 +45,11 @@
     </xsl:copy>
   </xsl:template>
   
+  <xsl:template match="head" mode="resolve-cascade">
+    <xsl:copy>
+      <xsl:apply-templates select="@*, node() except meta[@http-equiv = 'Content-Type']" mode="#current"/>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    </xsl:copy>
+  </xsl:template>
+  
 </xsl:stylesheet>
