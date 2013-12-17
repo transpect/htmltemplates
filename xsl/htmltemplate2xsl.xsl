@@ -36,6 +36,12 @@
   <xsl:template match="a[@rel = 'calc']">
     <xslout:call-template name="{@name}">
       <xsl:apply-templates select="input"/>
+      <xsl:variable name="non-input-nodes" as="node()*" select="node() except input"/>
+      <xsl:if test="matches(string-join($non-input-nodes, ''), '\S') or $non-input-nodes/self::*">
+        <xslout:with-param name="_content">
+          <xsl:sequence select="$non-input-nodes"/>
+        </xslout:with-param>
+      </xsl:if>
     </xslout:call-template>
   </xsl:template>
   
