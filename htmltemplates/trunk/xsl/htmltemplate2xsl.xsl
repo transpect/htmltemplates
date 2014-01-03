@@ -19,6 +19,7 @@
     <xslout:stylesheet version="2.0">
       <!-- The implementing stylesheet (or imported stylesheets thereof) must provide a template named 'main' -->
       <xsl:sequence select="$implementing-stylesheet/*/node()"/>
+      <xsl:apply-templates select="/html/body/div[@id][1]/input" mode="root"/> 
       <xslout:template name="body">
         <body xmlns="http://www.w3.org/1999/xhtml">
           <xsl:apply-templates select="/html/body/div[@id][1]"/>
@@ -45,8 +46,12 @@
     </xslout:call-template>
   </xsl:template>
   
-  <xsl:template match="input[@name][@value]">
-    <xslout:with-param name="{@name}" select="'{@value}'"/>
+  <xsl:template match="input[@title][@value]">
+    <xslout:with-param name="{@title}" select="'{@value}'" tunnel="yes"/>
+  </xsl:template>
+    
+  <xsl:template match="input[@title][@value]" mode="root">
+    <xslout:param name="{@title}" select="'{@value}'"/>
   </xsl:template>
   
   <xsl:key name="by-id" match="*[@id]" use="@id"/>
@@ -58,7 +63,7 @@
   <!-- by convention, only divs that are immediately below body (and that have an ID)
     will be regarded as containers that surround template elements. They will be unwrapped. -->  
   <xsl:template match="body/div[@id]">
-    <xsl:apply-templates/>
+    <xsl:apply-templates select="* except input"/>
   </xsl:template>
   
 </xsl:stylesheet>

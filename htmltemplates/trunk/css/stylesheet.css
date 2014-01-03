@@ -51,7 +51,7 @@
 /* --- GENERELL --- */
 
 body { 
-  font-family:serif; 
+  font-family:sans-serif; 
   line-height:1.3; 
   background-color:#fff; 
   padding:0; 
@@ -88,11 +88,13 @@ p.noindent-top {
   text-align:left;
 }
 
-h1, h2, h3 { margin:2em 0em 1em 0em; color:#C099C2;}
+h1, h2, h3 { margin:2em 0em 1em 0em; color:#C099C2; font-family:serif;}
 
 div.impress, div.frontmatter { border:1px solid #dedede; margin:1em 0em; padding:1em;}
 
 .documentation {color:#CBE7B0;}
 
-a[rel=calc]:before {content: attr(name); background-color:#C099C2; color:#fff; display:inline-block; padding:0.2em; margin-top:0.5em; margin-right:0.5em; cursor:text;}
+a[rel=calc]::before {content: attr(name); background-color:#C099C2; color:#fff; display:inline-block; padding:0.2em; margin-top:0.5em; margin-right:0.5em; cursor:text;}
 
+a input { background-color:#CBE7B0; width:3em; border:1px solid #ccc;}
+input::after {content: attr(name); }
