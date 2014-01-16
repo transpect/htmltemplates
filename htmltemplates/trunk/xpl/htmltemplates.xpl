@@ -43,10 +43,20 @@
       <p:documentation>HTML template, possibly consolidated by html:consolidate-templates</p:documentation>
     </p:input>
     <p:input port="generating-xsl">
-      <p:documentation>A stylesheet that translates &lt;a rel="calc" name="…"/> to &lt;xsl:call-template name="…"/>.
+      <p:documentation>A stylesheet that translates &lt;a rel="calc" name="…"/> to &lt;xsl:call-template name="…"/>.         
         The called templates have to be supplied on the 'implementing-xsl' port. implementing-xsl may of course
         import other stylesheets. This supports the configuration cascade: the implementing stylesheet may be
         a work-specific one, loaded by bc:load-cascaded, that imports the more generic stylesheets.
+        &lt;a rel="calc"> may contain parameters &lt;input title="param-name" value="string"/>. These parameters
+        have to be handled by the implementing stylesheet. 
+        
+        The remainder of the &lt;a rel="calc"> children will be passed to the implementing stylesheet in
+        the $_content variable. The template might then choose to process a contained &lt;h2>, &lt;h3>, … HTML 
+        element as the heading of the auto-generated section that it is going to create.
+        
+        Another mechanism is transclusion: &lt;a rel="transclude" href="#foo"/> will replace itself with 
+        the content of &lt;div id="foo">&lt;/div> (that must reside immediately below the assembled HTML template’s 
+        body element). 
         </p:documentation>
       <p:document href="../xsl/htmltemplate2xsl.xsl"/>
     </p:input>
