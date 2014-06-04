@@ -121,5 +121,90 @@
     </letex:store-debug>
   </p:declare-step>
   
+  <p:declare-step name="templates" type="html:templates">
+    <p:documentation xmlns="http://www.w3.org/1999/xhtml">
+      <p>A wrapper for the individual other steps in this library.</p>
+    </p:documentation>
+    <p:input port="source" primary="true">
+      <p:documentation xmlns="http://www.w3.org/1999/xhtml">
+        <p>An XHTML document that represents the body of a work (no frontmatter etc. – this will be added by this step).</p>
+      </p:documentation>
+    </p:input>
+    <p:input port="meta">
+      <p:documentation xmlns="http://www.w3.org/1999/xhtml">
+        <p>A metadata document in any vocabulary. Extracting meaningful data from this document 
+          is up the implementing stylesheet.</p>
+      </p:documentation>
+    </p:input>
+    <p:input port="paths">
+      <p:documentation xmlns="http://www.w3.org/1999/xhtml">
+        <p>A transpect paths document (<code>c:param-set</code> with certain <code>c:param</code>s
+          that enable cascaded loading).</p>
+      </p:documentation>
+    </p:input>
+    <p:output port="result" primary="true">
+      <p:documentation xmlns="http://www.w3.org/1999/xhtml">
+        <p>The source XHTML document that is enhanced with rendered metadata.</p>
+      </p:documentation>
+    </p:output>
+    <p:option name="debug" required="false" select="'no'"/>
+    <p:option name="debug-dir-uri" required="false" select="'debug'"/>
+    <p:option name="html-template" required="false" select="'htmltemplates/template.xhtml'"/>
+    <p:option name="xsl-implementation" required="false" select="'htmltemplates/implementation.xsl'"/>
+    
+    <bc:load-whole-cascade name="all-templates">
+      <p:with-option name="filename" select="$html-template"><p:empty/></p:with-option>
+      <p:input port="paths">
+        <p:pipe port="paths" step="templates"/>
+      </p:input>
+    </bc:load-whole-cascade>
+    
+    <html:consolidate-templates name="consolidate-templates">
+      <p:with-option name="debug" select="$debug"/>
+      <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+    </html:consolidate-templates>
+    
+    <p:sink/>
+    
+    <bc:load-cascaded name="htmltemplates-implementation">
+      <p:with-option name="filename" select="$xsl-implementation"><p:empty/></p:with-option>
+      <p:input port="paths">
+        <p:pipe port="paths" step="templates"/>
+      </p:input>
+      <p:with-option name="debug" select="$debug"/>
+      <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+    </bc:load-cascaded>
+    
+    <html:generate-xsl-from-html-template name="generate-xsl-from-html-template">
+      <p:input port="implementing-xsl">
+        <p:pipe port="result" step="htmltemplates-implementation"/>
+      </p:input>
+      <p:input port="source">
+        <p:pipe port="result" step="consolidate-templates"/>
+      </p:input>
+      <p:with-option name="debug" select="$debug"/>
+      <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+    </html:generate-xsl-from-html-template>
+    
+    <p:sink/>
+    
+    <html:apply-generated-xsl name="apply-generated">
+      <p:input port="source">
+        <p:pipe port="source" step="templates"/>
+      </p:input>
+      <p:input port="metadata">
+        <p:pipe port="meta" step="templates"/>
+      </p:input>
+      <p:input port="stylesheet-from-htmltemplate">
+        <p:pipe port="result" step="generate-xsl-from-html-template"/>
+      </p:input>
+      <p:input port="paths">
+        <p:pipe port="paths" step="templates"/>
+      </p:input>
+      <p:with-option name="debug" select="$debug"/>
+      <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+    </html:apply-generated-xsl>
+    
+  </p:declare-step>
 
 </p:library>
