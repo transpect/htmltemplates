@@ -36,7 +36,7 @@
   </xsl:template>
 
   <xsl:template match="* | @*">
-    <xsl:copy>
+    <xsl:copy copy-namespaces="no">
       <xsl:apply-templates select="@*, node()"/>
     </xsl:copy>
   </xsl:template>
@@ -46,6 +46,8 @@
       <xsl:apply-templates select="@*, node()" mode="#current"/>
     </xsl:copy>
   </xsl:template>
+
+  <!--<xsl:template match="text()[not(normalize-space())]" mode="copy-xsl"/>-->
 
   <xsl:template match="html:*" mode="copy-xsl">
     <xsl:apply-templates select="." mode="#default"/>
