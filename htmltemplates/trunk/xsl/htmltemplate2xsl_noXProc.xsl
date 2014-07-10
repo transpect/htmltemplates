@@ -49,7 +49,7 @@
 
   <!--<xsl:template match="text()[not(normalize-space())]" mode="copy-xsl"/>-->
 
-  <xsl:template match="html:*" mode="copy-xsl">
+  <xsl:template match="*" mode="copy-xsl">
     <xsl:apply-templates select="." mode="#default"/>
   </xsl:template>
   
