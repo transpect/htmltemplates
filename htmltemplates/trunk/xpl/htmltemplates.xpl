@@ -229,7 +229,7 @@
 
     <!--<cx:message>
       <p:with-option name="message" select="'BASE: ', replace(
-  	     	          /c:param-set/c:param[@name eq 'file-uri']/@value, 
+  	     	          /c:param-set/c:param[@name eq 'file']/@value, 
   		              '/[^/]+/([^/]+)$',
   		              if ($different-basename = '') 
   		              then '/epub/$1' 
@@ -243,7 +243,7 @@
       <p:with-option name="attribute-value"
         select="replace(
   	              replace(
-  	     	          /c:param-set/c:param[@name eq 'file-uri']/@value, 
+  	     	          /c:param-set/c:param[@name eq 'file']/@value, 
   		              '/[^/]+/([^/]+)$',
   		              if ($different-basename = '') 
   		              then '/epub/$1' 
@@ -280,7 +280,7 @@
         <p:http-request name="get-cover"/>
         <p:store name="store-cover" cx:decode="true">
           <p:with-option name="href"
-            select="replace(/c:param-set/c:param[@name eq 'file-uri']/@value, $file-uri-to-cover-regex, '/images/cover.jpg')">
+            select="replace(/c:param-set/c:param[@name eq 'file']/@value, $file-uri-to-cover-regex, '/images/cover.jpg')">
             <p:pipe port="paths" step="templates"/>
           </p:with-option>
         </p:store>
