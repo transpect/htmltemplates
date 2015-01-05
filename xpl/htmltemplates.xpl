@@ -5,7 +5,7 @@
   xmlns:cx="http://xmlcalabash.com/ns/extensions"
   xmlns:letex="http://www.le-tex.de/namespace"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-  xmlns:bc="http://transpect.le-tex.de/book-conversion"
+  xmlns:transpect="http://www.le-tex.de/namespace/transpect"
   xmlns:html="http://www.w3.org/1999/xhtml"
   version="1.0">
 
@@ -48,7 +48,7 @@
       <p:documentation>A stylesheet that translates &lt;a rel="calc" name="…"/> to &lt;xsl:call-template name="…"/>.         
         The called templates have to be supplied on the 'implementing-xsl' port. implementing-xsl may of course
         import other stylesheets. This supports the configuration cascade: the implementing stylesheet may be
-        a work-specific one, loaded by bc:load-cascaded, that imports the more generic stylesheets.
+        a work-specific one, loaded by transpect:load-cascaded, that imports the more generic stylesheets.
         &lt;a rel="calc"> may contain parameters &lt;input title="param-name" value="string"/>. These parameters
         have to be handled by the implementing stylesheet. 
         
@@ -169,14 +169,14 @@
       may be rendered in the result.</p:documentation>
     </p:option>
 
-    <bc:load-whole-cascade name="all-templates">
+    <transpect:load-whole-cascade name="all-templates">
       <p:with-option name="filename" select="$html-template">
         <p:empty/>
       </p:with-option>
       <p:input port="paths">
         <p:pipe port="paths" step="templates"/>
       </p:input>
-    </bc:load-whole-cascade>
+    </transpect:load-whole-cascade>
 
     <html:consolidate-templates name="consolidate-templates">
       <p:with-option name="debug" select="$debug"/>
@@ -185,7 +185,7 @@
 
     <p:sink/>
 
-    <bc:load-cascaded name="htmltemplates-implementation">
+    <transpect:load-cascaded name="htmltemplates-implementation">
       <p:with-option name="filename" select="$xsl-implementation">
         <p:empty/>
       </p:with-option>
@@ -194,7 +194,7 @@
       </p:input>
       <p:with-option name="debug" select="$debug"/>
       <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
-    </bc:load-cascaded>
+    </transpect:load-cascaded>
 
     <html:generate-xsl-from-html-template name="generate-xsl-from-html-template">
       <p:input port="implementing-xsl">
