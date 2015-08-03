@@ -80,10 +80,14 @@
   
   <xsl:template match="a[@rel = 'transclude'][@href]">
     <xsl:variable name="target" select="key('by-id', replace(@href, '^#', ''), $htmltemplate)" as="element(html:div)?"/>
-    <xsl:if test="not($target)">
-      <xsl:message select="'htmltemplates: target ', string(@href), ' not found'" terminate="yes"></xsl:message>
-    </xsl:if>
-    <xsl:apply-templates select="$target"/>
+    <xsl:choose>
+      <xsl:when test="not($target)">
+        <xsl:message select="'htmltemplates: target ', string(@href), ' not found'" ></xsl:message>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:apply-templates select="$target"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <!-- by convention, only divs that are immediately below body (and that have an ID)
