@@ -179,8 +179,12 @@
     </transpect:load-whole-cascade>
 
     <html:consolidate-templates name="consolidate-templates">
-      <p:with-option name="debug" select="$debug"/>
-      <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
+      <p:with-option name="debug" select="$debug">
+        <p:empty/>
+      </p:with-option>
+      <p:with-option name="debug-dir-uri" select="$debug-dir-uri">
+        <p:empty/>
+      </p:with-option>
     </html:consolidate-templates>
 
     <p:sink/>
