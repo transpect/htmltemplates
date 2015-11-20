@@ -3,15 +3,14 @@
   xmlns:p="http://www.w3.org/ns/xproc" 
   xmlns:c="http://www.w3.org/ns/xproc-step"  
   xmlns:cx="http://xmlcalabash.com/ns/extensions"
-  xmlns:letex="http://www.le-tex.de/namespace"
+  xmlns:tr="http://transpect.io" 
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-  xmlns:transpect="http://www.le-tex.de/namespace/transpect"
   xmlns:html="http://www.w3.org/1999/xhtml"
   version="1.0">
 
   <p:import href="http://xmlcalabash.com/extension/steps/library-1.0.xpl" />
-  <p:import href="http://transpect.le-tex.de/xproc-util/xslt-mode/xslt-mode.xpl"/>
-  <p:import href="http://transpect.le-tex.de/xproc-util/store-debug/store-debug.xpl"/>
+  <p:import href="http://transpect.io/xproc-util/xslt-mode/xpl/xslt-mode.xpl"/>
+  <p:import href="http://transpect.io/xproc-util/store-debug/xpl/store-debug.xpl"/>
   
   <p:declare-step name="consolidate-templates" type="html:consolidate-templates">
     <p:input port="source" primary="true" sequence="true">
@@ -34,10 +33,10 @@
       </p:input>
       <p:input port="parameters"><p:empty/></p:input>
     </p:xslt>
-    <letex:store-debug pipeline-step="htmltemplates/compound" extension="xhtml">
+    <tr:store-debug pipeline-step="htmltemplates/compound" extension="xhtml">
       <p:with-option name="active" select="$debug"/>
       <p:with-option name="base-uri" select="$debug-dir-uri"/>
-    </letex:store-debug>
+    </tr:store-debug>
   </p:declare-step>
 
   <p:declare-step name="generate-xsl-from-html-template" type="html:generate-xsl-from-html-template">
@@ -83,10 +82,10 @@
         <p:pipe step="generate-xsl-from-html-template" port="implementing-xsl"/>
       </p:input>
     </p:xslt>
-    <letex:store-debug pipeline-step="htmltemplates/generated" extension="xsl" name="store">
+    <tr:store-debug pipeline-step="htmltemplates/generated" extension="xsl" name="store">
       <p:with-option name="active" select="$debug"/>
       <p:with-option name="base-uri" select="$debug-dir-uri"/>
-    </letex:store-debug>
+    </tr:store-debug>
     <p:sink/>
   </p:declare-step>
 
@@ -120,10 +119,10 @@
       </p:input>
       <p:with-param name="qa-run" select="$qa-run"/>
     </p:xslt>
-    <letex:store-debug pipeline-step="htmltemplates/applied-generated" extension="xhtml">
+    <tr:store-debug pipeline-step="htmltemplates/applied-generated" extension="xhtml">
       <p:with-option name="active" select="$debug"/>
       <p:with-option name="base-uri" select="$debug-dir-uri"/>
-    </letex:store-debug>
+    </tr:store-debug>
   </p:declare-step>
   
   <p:declare-step name="templates" type="html:templates">
@@ -169,14 +168,14 @@
       may be rendered in the result.</p:documentation>
     </p:option>
 
-    <transpect:load-whole-cascade name="all-templates">
+    <tr:load-whole-cascade name="all-templates">
       <p:with-option name="filename" select="$html-template">
         <p:empty/>
       </p:with-option>
       <p:input port="paths">
         <p:pipe port="paths" step="templates"/>
       </p:input>
-    </transpect:load-whole-cascade>
+    </tr:load-whole-cascade>
 
     <html:consolidate-templates name="consolidate-templates">
       <p:with-option name="debug" select="$debug">
@@ -189,7 +188,7 @@
 
     <p:sink/>
 
-    <transpect:load-cascaded name="htmltemplates-implementation">
+    <tr:load-cascaded name="htmltemplates-implementation">
       <p:with-option name="filename" select="$xsl-implementation">
         <p:empty/>
       </p:with-option>
@@ -198,7 +197,7 @@
       </p:input>
       <p:with-option name="debug" select="$debug"/>
       <p:with-option name="debug-dir-uri" select="$debug-dir-uri"/>
-    </transpect:load-cascaded>
+    </tr:load-cascaded>
 
     <html:generate-xsl-from-html-template name="generate-xsl-from-html-template">
       <p:input port="implementing-xsl">
@@ -260,11 +259,11 @@
       </p:with-option>
     </p:add-attribute>
 
-    <letex:store-debug extension="xhtml" name="store">
+    <tr:store-debug extension="xhtml" name="store">
       <p:with-option name="pipeline-step" select="concat('htmltemplates/generated_', replace(base-uri(/*), '^.+/(.+)\..+?$', '$1'))"/>
       <p:with-option name="active" select="$debug"/>
       <p:with-option name="base-uri" select="$debug-dir-uri"/>
-    </letex:store-debug>
+    </tr:store-debug>
     
     <p:choose name="get-http-cover">
       <p:when test="matches(/html:html/html:body/html:div[@class eq 'epub-cover-image-container']/html:img/@src, 'https?:')">
