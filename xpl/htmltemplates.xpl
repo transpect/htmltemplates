@@ -47,7 +47,7 @@
       <p:documentation>A stylesheet that translates &lt;a rel="calc" name="…"/> to &lt;xsl:call-template name="…"/>.         
         The called templates have to be supplied on the 'implementing-xsl' port. implementing-xsl may of course
         import other stylesheets. This supports the configuration cascade: the implementing stylesheet may be
-        a work-specific one, loaded by transpect:load-cascaded, that imports the more generic stylesheets.
+        a work-specific one, loaded by tr:load-cascaded, that imports the more generic stylesheets.
         &lt;a rel="calc"> may contain parameters &lt;input title="param-name" value="string"/>. These parameters
         have to be handled by the implementing stylesheet. 
         
@@ -177,7 +177,12 @@
       </p:input>
     </tr:load-whole-cascade>
 
+    <p:sink/>
+    
     <html:consolidate-templates name="consolidate-templates">
+      <p:input port="source">
+        <p:pipe port="result" step="all-templates"/>
+      </p:input>
       <p:with-option name="debug" select="$debug">
         <p:empty/>
       </p:with-option>
@@ -185,8 +190,6 @@
         <p:empty/>
       </p:with-option>
     </html:consolidate-templates>
-
-    <p:sink/>
 
     <tr:load-cascaded name="htmltemplates-implementation">
       <p:with-option name="filename" select="$xsl-implementation">
