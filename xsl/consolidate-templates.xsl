@@ -20,6 +20,7 @@
       <xsl:variable name="current-ids" select="*/@id" as="xs:string*"/>
       <!-- in addition to the most generic document’s body content, transform all elements with
         IDs in the other bodies. -->
+<xsl:message select="'#########################', $current-ids"/>
       <xsl:apply-templates select="@*, node(), 
                                    collection()[position() gt 1]//body/*[@id][not(@id = $current-ids)]" 
                            mode="#current"/>
@@ -29,7 +30,7 @@
   <!-- Priority=2: If body has an ID, it may be superseded by a more specific document’s body -->
   <xsl:template match="*[@id]" mode="resolve-cascade" priority="2">
     <xsl:for-each-group select="collection()//*[@id = current()/@id]" group-by="@id">
-      <xsl:apply-templates select="current-group()[last()]" mode="elt-with-id"/>
+      <xsl:apply-templates select="current-group()[1]" mode="elt-with-id"/>
     </xsl:for-each-group>
   </xsl:template>
   
