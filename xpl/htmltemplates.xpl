@@ -175,6 +175,7 @@
       <p:input port="paths">
         <p:pipe port="paths" step="templates"/>
       </p:input>
+      <p:with-option name="order" select="'most-specific-first'"/>
     </tr:load-whole-cascade>
 
     <p:sink/>
