@@ -20,9 +20,10 @@
       <xsl:variable name="current-ids" select="*/@id" as="xs:string*"/>
       <!-- in addition to the most generic document’s body content, transform all elements with
         IDs in the other bodies. -->
-      <xsl:apply-templates select="@*, node(), 
-                                   collection()[position() gt 1]//body/*[@id][not(@id = $current-ids)]" 
-                           mode="#current"/>
+      <xsl:apply-templates select="@*, node()" mode="#current"/>
+      <xsl:for-each-group select="collection()[position() gt 1]//body/*[@id][not(@id = $current-ids)]" group-by="@id">
+        <xsl:apply-templates select="current-group()[1]" mode="#current"/>
+      </xsl:for-each-group>
     </xsl:copy>
   </xsl:template>
   
