@@ -11,6 +11,7 @@
   <p:import href="http://xmlcalabash.com/extension/steps/library-1.0.xpl" />
   <p:import href="http://transpect.io/xproc-util/xslt-mode/xpl/xslt-mode.xpl"/>
   <p:import href="http://transpect.io/xproc-util/store-debug/xpl/store-debug.xpl"/>
+  <p:import href="http://transpect.io/cascade/xpl/load-cascaded.xpl"/>
   
   <p:declare-step name="consolidate-templates" type="html:consolidate-templates">
     <p:input port="source" primary="true" sequence="true">
