@@ -1,0 +1,100 @@
+/* --- FONTS --- */
+@font-face { 
+  font-family: sans-serif; 
+  font-style: normal; 
+  font-weight: normal; 
+  src: url('http://transpect.le-tex.de/fontlib/dejavu-sans/regular/DejaVuSans.otf'); 
+} 
+@font-face { 
+  font-family: sans-serif; 
+  font-style: normal; 
+  font-weight: bold; 
+  src: url('http://transpect.le-tex.de/fontlib/dejavu-sans/bold/DejaVuSans-Bold.otf'); 
+} 
+@font-face {
+  font-family: sans-serif; 
+  font-style: italic; 
+  font-weight: normal; 
+  src: url('http://transpect.le-tex.de/fontlib/dejavu-sans/italic/DejaVuSans-Oblique.otf'); 
+} 
+@font-face { 
+  font-family: sans-serif; 
+  font-style: italic; 
+  font-weight: bold; 
+  src: url('http://transpect.le-tex.de/fontlib/dejavu-sans/bold-italic/DejaVuSans-BoldOblique.otf'); 
+}
+@font-face { 
+  font-family: serif; 
+  font-style: normal; 
+  font-weight: normal; 
+  src: url('http://transpect.le-tex.de/fontlib/gentium-basic/regular/GenBasR.ttf'); 
+} 
+@font-face { 
+  font-family: serif; 
+  font-style: normal; 
+  font-weight: bold; 
+  src: url('http://transpect.le-tex.de/fontlib/gentium-basic/bold/GenBasB.ttf'); 
+} 
+@font-face { 
+  font-family: serif; 
+  font-style: italic; 
+  font-weight: normal; 
+  src: url('http://transpect.le-tex.de/fontlib/gentium-basic/italic/GenBasI.ttf'); 
+} 
+@font-face { 
+  font-family: serif; 
+  font-style: italic; 
+  font-weight: bold; 
+  src: url('http://transpect.le-tex.de/fontlib/gentium-basic/bold-italic/GenBasBI.ttf'); 
+} 
+
+/* --- GENERELL --- */
+
+body { 
+  font-family:sans-serif; 
+  line-height:1.3; 
+  background-color:#fff; 
+  padding:0; 
+  margin:10% 5% 0% 5%;
+}
+
+a { text-decoration:none; color:black; }
+a.block { display:block; width:auto;  margin-top:0.5em; cursor:pointer; text-decoration:underline; }
+
+p {
+  font-size:1em;  
+  line-height:140%;
+  text-indent:1em;
+  margin-bottom:0;
+  margin-top:0;
+  text-align:left;
+}
+
+p.noindent {
+  font-size:1em;  
+  line-height:140%;
+  text-indent:0em;
+  margin-bottom:0;
+  margin-top:0;
+  text-align:left;
+}
+
+p.noindent-top {
+  font-size:1em;  
+  line-height:140%;
+  text-indent:0em;
+  margin-bottom:0;
+  margin-top:1em;
+  text-align:left;
+}
+
+h1, h2, h3 { margin:2em 0em 1em 0em; color:#C099C2; font-family:serif;}
+
+div.impress, div.frontmatter { border:1px solid #dedede; margin:1em 0em; padding:1em;}
+
+.documentation {color:#CBE7B0;}
+
+a[rel=calc]::before {content: attr(name); background-color:#C099C2; color:#fff; display:inline-block; padding:0.2em; margin-top:0.5em; margin-right:0.5em; cursor:text;}
+
+a input { background-color:#CBE7B0; width:3em; border:1px solid #ccc;}
+input::after {content: attr(name); }
